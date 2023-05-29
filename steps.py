@@ -16,19 +16,6 @@ def training_data_loader() -> Output(
     x_train, x_test = x_train / 255, x_test / 255
     return x_train, x_test, y_train, y_test
 
-
-from zenml.integrations.mlflow.steps.mlflow_deployer import mlflow_model_registry_deployer_step
-from zenml.integrations.mlflow.steps.mlflow_registry import mlflow_register_model_step
-
-model_deployer = mlflow_model_registry_deployer_step.with_options(
-    parameters=dict(
-        registry_model_name="zenml-model",
-        registry_model_version="1",
-        # or you can use the model stage if you have set it in the MLflow registry
-        # registered_model_stage="None" # "Staging", "Production", "Archived"
-    )
-)
-
 import mlflow
 from zenml.client import Client
 
