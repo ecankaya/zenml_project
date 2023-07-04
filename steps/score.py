@@ -13,5 +13,4 @@ def test_score(
 ) -> float:
     """Calculate the accuracy on the test set"""
     accuracy = model.score(x_test.to_numpy(), y_test.to_numpy())
-    # print(f"Test accuracy: {accuracy}")
     return accuracy
