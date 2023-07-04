@@ -1,6 +1,7 @@
 from zenml import pipeline
 from zenml.integrations.evidently.steps import evidently_profile_step
-from steps.flower_predictions import infer, predict
+from steps.flower_predictions import infer
+from steps.mlflow_predict import predict
 from steps.sklearn_dataloader import training_data_loader
 
 
