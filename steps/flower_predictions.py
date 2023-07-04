@@ -50,6 +50,6 @@ def predict(
     inference = inference.to_numpy()
     prediction = service.predict(inference)
     # prediction = prediction.argmax(axis=-1)
-    print(prediction)
+    # print(prediction)
     prediction = pd.DataFrame(prediction, columns=["series"])
     return prediction

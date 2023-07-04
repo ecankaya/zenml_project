@@ -12,7 +12,7 @@ from zenml.integrations.mlflow.steps import mlflow_model_deployer_step
 def sklearn_pipeline():
     x_train, x_test, y_train, y_test = infer()
     # x_train, x_test, y_train, y_test = training_data_loader()
-    model = svc_trainer_mlflow(x_train=x_train, y_train=y_train, x_test=x_test, y_test=y_test)
+    model = svc_trainer_mlflow(x_train=x_train, y_train=y_train)
     accuracy = test_score(x_test, y_test, model)
     model_register = mlflow_register_model_step(model, "iris-model")
     deployment = mlflow_model_deployer_step(model)

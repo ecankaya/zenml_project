@@ -16,38 +16,20 @@ import mlflow
 import pandas as pd
 from sklearn.base import ClassifierMixin
 from sklearn.svm import SVC
-
 from zenml import step
 from zenml.client import Client
-from zenml.integrations.mlflow.experiment_trackers import (
-    MLFlowExperimentTracker,
-)
 
 experiment_tracker = Client().active_stack.experiment_tracker
-
-if not experiment_tracker or not isinstance(
-        experiment_tracker, MLFlowExperimentTracker
-):
-    raise RuntimeError(
-        "Your active stack needs to contain a MLFlow experiment tracker for "
-        "this example to work."
-    )
 
 
 @step(enable_cache=False, experiment_tracker=experiment_tracker.name)
 def svc_trainer_mlflow(
         x_train: pd.DataFrame,
         y_train: pd.Series,
-        x_test: pd.DataFrame,
-        y_test: pd.Series,
         gamma=0.01,
 ) -> ClassifierMixin:
     """Train a sklearn SVC classifier and log to MLflow."""
     mlflow.sklearn.autolog()  # log all model hparams and metrics to MLflow
     model = SVC(gamma=gamma)
     model.fit(x_train.to_numpy(), y_train.to_numpy())
-    train_acc = model.score(x_train.to_numpy(), y_train.to_numpy())
-    accuracy = model.score(x_test.to_numpy(), y_test.to_numpy())
-    print(f"train accuracy: {train_acc}")
-    print(f"Test accuracy: {accuracy}")
     return model
