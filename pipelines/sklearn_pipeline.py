@@ -1,6 +1,5 @@
 from zenml import pipeline
 from zenml.integrations.mlflow.steps.mlflow_registry import mlflow_register_model_step
-
 from steps.flower_predictions import infer
 from steps.score import test_score
 from steps.sklearn_trainer import svc_trainer_mlflow
